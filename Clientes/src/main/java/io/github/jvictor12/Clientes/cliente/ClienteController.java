@@ -1,5 +1,6 @@
 package io.github.jvictor12.Clientes.cliente;
 
+import io.github.jvictor12.Clientes.infraestrutura.service.Facade;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,11 @@ import java.util.Optional;
 public class ClienteController {
 
     @Autowired
-    public ClienteRepository clienteRepository;
-
+    public Facade facade;
 
     @GetMapping
     public ResponseEntity findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(facade.ClienteFindAll());
     }
 
     @GetMapping("/{id}")

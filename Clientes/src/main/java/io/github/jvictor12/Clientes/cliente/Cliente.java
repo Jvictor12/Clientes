@@ -2,11 +2,9 @@ package io.github.jvictor12.Clientes.cliente;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.Constraint;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
-import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
 import java.time.LocalDate;
 
