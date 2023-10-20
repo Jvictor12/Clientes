@@ -29,10 +29,36 @@ public class ClienteService {
             throw new ValidationException("Sem dados");
         }
 
-        if(!validateCliente(cliente)){
+        if(validateCliente(cliente)){
             return clienteRepository.save(cliente);
         }
         return cliente;
+    }
+
+    public Cliente update(Cliente cliente) {
+
+        if (cliente == null) {
+            throw new ValidationException("Sem dados");
+        }
+
+        if (!clienteRepository.existsById(cliente.getId())){
+            throw new ValidationException("O cliente não existe no sistema");
+        }
+
+        if(validateCliente(cliente)){
+            return clienteRepository.save(cliente);
+        }
+
+        return cliente;
+    }
+
+    public void delete (Cliente cliente) {
+
+        if(!clienteRepository.existsById(cliente.getId())){
+            throw new ObjectNotFoundException("Cliente não encontrado");
+        }
+
+        clienteRepository.deleteById(cliente.getId());
     }
 
     public boolean validateCliente(Cliente cliente) {
@@ -41,5 +67,7 @@ public class ClienteService {
         if(clienteFindByCPF != null && !clienteFindByCPF.equals(cliente)){
             throw new ValidationException("CPF do cliente ja cadastrado no sistema");
         }
+
+        return true;
     }
 }

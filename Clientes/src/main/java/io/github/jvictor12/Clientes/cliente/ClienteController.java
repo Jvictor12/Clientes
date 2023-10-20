@@ -30,37 +30,21 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity safe (@RequestBody @Valid Cliente cliente){
-            clienteRepository.save(cliente);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(facade.clienteSave(cliente));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update (@RequestBody @Valid Cliente cliente) throws Exception {
-        if (cliente == null) {
-            throw new Exception("Cliente nulo");
-        } else {
-            Optional<Cliente> cliente1 = clienteRepository.findById(cliente.getId());
-            cliente.setDataCadastro(cliente1.get().getDataCadastro());
-            clienteRepository.save(cliente);
-        }
+    public ResponseEntity update (@RequestBody @Valid Cliente cliente) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(cliente);
+        return ResponseEntity.status(HttpStatus.OK).body(facade.clienteUpdate(cliente));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete (@PathVariable String id){
 
-        clienteRepository.deleteById(id);
+        facade.clienteDelete(facade.clienteFindById(id));
 
-        clienteRepository.findById(id)
-                .map( cliente -> {
-                    clienteRepository.delete(cliente);
-                    return ResponseEntity.status(HttpStatus.OK).body(null);
-                })
-                .orElseThrow( () ->
-                    new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
-
-        return null;
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

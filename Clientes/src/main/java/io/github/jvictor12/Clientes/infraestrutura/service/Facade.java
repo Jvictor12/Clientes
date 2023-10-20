@@ -17,4 +17,8 @@ public class Facade {
 
     public Cliente clienteSave (Cliente cliente) { return clienteService.save(cliente); }
 
+    public Cliente clienteUpdate (Cliente cliente) { return clienteService.update(cliente); }
+
+    public void clienteDelete (Cliente cliente) { clienteService.delete(cliente); }
+
 }
