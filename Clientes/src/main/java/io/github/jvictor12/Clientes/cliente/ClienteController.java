@@ -20,17 +20,12 @@ public class ClienteController {
 
     @GetMapping
     public ResponseEntity findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(facade.ClienteFindAll());
+        return ResponseEntity.status(HttpStatus.OK).body(facade.clienteFindAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable String id){
-
-        if (clienteRepository.existsById(id))
-            return ResponseEntity.status(HttpStatus.OK).body(clienteRepository.findByUuID(id));
-        else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado");
-        }
+            return ResponseEntity.status(HttpStatus.OK).body(facade.clienteFindById(id));
     }
 
     @PostMapping

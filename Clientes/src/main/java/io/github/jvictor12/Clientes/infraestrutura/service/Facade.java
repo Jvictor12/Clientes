@@ -11,6 +11,10 @@ public class Facade {
     @Autowired
     public ClienteService clienteService;
 
-    public List<Cliente> ClienteFindAll(){ return clienteService.findAll(); };
+    public List<Cliente> clienteFindAll(){ return clienteService.findAll(); };
+
+    public Cliente clienteFindById(String id) { return clienteService.findById(id); }
+
+    public Cliente clienteSave (Cliente cliente) { return clienteService.save(cliente); }
 
 }

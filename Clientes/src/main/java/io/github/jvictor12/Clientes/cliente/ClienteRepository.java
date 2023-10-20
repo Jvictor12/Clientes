@@ -10,4 +10,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, String> {
 
     @Query("FROM tb_cliente WHERE id = ?1")
     Optional<Cliente> findByUuID(String id);
+
+    public Cliente findByCPF (String cpf);
 }
